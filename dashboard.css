@@ -1,0 +1,237 @@
+/* --- Admin Dashboard CSS (Simplified Reordered Design) --- */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --bg-page: #FDFEFE;
+    --card-bg: #FFFFFF;
+    --text-main: #1E293B;
+    --text-muted: #64748B;
+    --border: #F1F5F9;
+    
+    /* Buttons Colors */
+    --purple: #6366F1;
+    --green: #10B981;
+    --blue: #3B82F6;
+
+    /* Status Tints */
+    --amber: #D97706;
+    --emerald: #059669;
+    --rose: #DC2626;
+
+    --font-serif: 'Noto Sans Thai', sans-serif;
+    --font-body: 'Noto Sans Thai', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+body { background: var(--bg-page); color: var(--text-main); font-family: var(--font-body); line-height: 1.6; padding-bottom: 80px; }
+
+.dashboard-container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+.dashboard-header { display: flex; justify-content: space-between; align-items: flex-end; padding: 40px 0 20px; border-bottom: 2px solid var(--border); }
+.serif-title { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; line-height: 1; }
+.status-badge { font-size: 0.8rem; font-weight: 800; color: var(--text-muted); margin-top: 8px; }
+
+/* Sticky Navigation (Smaller & Modern) */
+.quick-nav-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    background: rgba(253, 254, 254, 0.85); /* Matches bg-page */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 12px 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+}
+
+.quick-nav { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px; 
+    max-width: 1000px; /* Aligns with container */
+    margin: 0 auto;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 0.82rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.08); filter: brightness(1.05); }
+
+.purple-btn { background: var(--purple); }
+.green-btn { background: var(--green); }
+.blue-btn { background: var(--blue); }
+
+.go-circle { 
+    width: 20px; height: 20px; 
+    background: rgba(255,255,255,0.2); 
+    border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center; 
+    font-size: 0.9rem; 
+    transition: 0.3s;
+}
+
+/* Shrunk Logic */
+.quick-nav-wrapper.shrunk {
+    padding: 8px 0;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.quick-nav-wrapper.shrunk .nav-btn {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.quick-nav-wrapper.shrunk .go-circle {
+    display: none;
+}
+
+/* Section Title */
+.section-title { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700; margin-bottom: 25px; color: var(--text-main); display: flex; align-items: center; gap: 15px; }
+.section-title::after { content: ""; height: 1.5px; flex: 1; background: var(--border); }
+
+/* Dashboard Content Sections */
+.dashboard-section { margin-bottom: 50px; }
+
+.stat-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+}
+
+.card-header-title { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 25px; }
+
+/* Grand Total Card */
+.grand-total-card {
+    background: linear-gradient(135deg, #6366F1 0%, #3B82F6 100%);
+    border: none;
+    color: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.grand-total-main .label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.mega-val-premium {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin: 20px 0 40px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.grand-total-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bt-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bt-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+}
+
+.bt-val {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+/* Grid Helpers */
+.grid-2-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+
+/* Money Stack (Net Amount) */
+.money-stack .m-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.money-stack .m-item:last-child { border-bottom: none; }
+.money-stack .m-item.highlight-row { background: #F0FDF4; margin: 0 -20px; padding: 12px 20px; border-radius: 12px; border-bottom: none; }
+
+.money-stack .label { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); }
+.money-stack .val { font-size: 1.15rem; font-weight: 800; }
+
+/* Workshop Section (Simplified Split Card) */
+.workshop-rights-row { display: flex; align-items: center; padding: 40px 30px; }
+.w-source-item { flex: 1; text-align: center; }
+.divider-v { width: 1.5px; height: 50px; background: var(--border); }
+.w-label { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 10px; }
+.w-val { font-size: 2.8rem; font-weight: 800; }
+.blue-text { color: var(--blue); }
+
+/* Shipping Section */
+.highlight-shipping { background: #F0FDF4; border-color: var(--emerald); }
+.mega-val { font-size: 3rem; font-weight: 800; line-height: 1; margin: 15px 0; }
+.card-desc { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+
+.delivery-split { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 25px; }
+.d-item { text-align: center; padding: 15px; background: #F8FAFC; border-radius: 20px; }
+.d-label { font-size: 0.75rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 8px; }
+.d-val { font-size: 1.8rem; font-weight: 800; color: var(--text-main); }
+
+/* Unique Users & Transaction Detail Section */
+.user-split-stats { display: flex; align-items: center; justify-content: space-around; padding: 10px 0; }
+.us-item { flex: 1; text-align: center; }
+.us-label { font-size: 0.75rem; font-weight: 800; color: var(--text-muted); display: block; margin-bottom: 5px; }
+.us-val { font-size: 2rem; font-weight: 800; color: var(--text-main); }
+.us-divider { width: 1.5px; height: 30px; background: var(--border); }
+
+/* State Colors */
+.amber { color: var(--amber); }
+.waterleaf { color: var(--emerald); }
+.red { color: var(--rose); }
+
+/* Animations */
+.animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 768px) {
+    .quick-nav { grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 0 10px; }
+    .nav-btn { padding: 8px 10px; font-size: 0.65rem; border-radius: 10px; }
+    .nav-btn .go-circle { display: none; }
+    
+    .grid-2-cols { grid-template-columns: 1fr; }
+    .serif-title { font-size: 1.8rem; }
+    .dashboard-container { padding: 0 15px; }
+
+    .mega-val-premium { font-size: 3rem; }
+    .grand-total-breakdown { grid-template-columns: 1fr; gap: 15px; }
+    .bt-item { flex-direction: row; justify-content: space-between; align-items: center; }
+}

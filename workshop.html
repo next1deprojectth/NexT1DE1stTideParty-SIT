@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop - NexT1DE1stTideParty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo-project.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="workshop.css">
+    <link rel="preload" href="images/background.jpg" as="image">
+</head>
+
+<body class="donate-page-body">
+    <!-- Background Image -->
+    <div class="page-background donate-hide" id="main-bg"></div>
+
+    <!-- Fixed Navbar -->
+    <nav class="nav-bar">
+        <button class="nav-back" id="nav-back" aria-label="กลับหน้าแรก">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <span class="nav-title" id="nav-title">Workshop NexT1DE</span>
+        <div class="nav-logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+            <img src="images/logo-project.png" alt="NexT1DE Logo">
+        </div>
+    </nav>
+
+    <!-- Step Indicator Section -->
+    <div class="step-indicator-container" id="step-indicator-wrapper" style="display:none;">
+        <div class="step-progress-bars">
+            <div class="progress-bar-item step-1-active" id="bar-1"></div>
+            <div class="progress-bar-item" id="bar-2"></div>
+            <div class="progress-bar-item" id="bar-3"></div>
+        </div>
+        <div class="step-text-label" id="step-label-text">ข้อมูลผู้ร่วม workshop (1/3)</div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="donate-main">
+
+        <div class="donate-step" id="step-0" style="display: flex; flex-direction: column; padding-bottom: 160px;">
+            <div class="step0-image-wrapper" style="cursor: zoom-in;" onclick="openPosterModal()">
+                <img src="images/donate_workshop.jpg" alt="Workshop Info" style="max-width:100%; border-radius:12px;">
+            </div>
+            <!-- Fixed Bottom Buttons for Step 0 -->
+            <div class="step0-btn-wrapper"
+                style="position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #E2E8F0; padding: 20px; z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.08); box-sizing: border-box;">
+                <button class="btn-confirm gradient-btn-3" id="btn-next-step0"
+                    style="margin-top: 0; font-size: 0.9rem; padding: 16px; border-radius: 12px; font-weight: 700; width: 100%;">
+                    ลงทะเบียนร่วมทำ Workshop
+                </button>
+                <div id="btn-edit-location"
+                    style="margin-top: 18px; display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#718096" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    <span style="font-size: 0.9rem; color: #718096; font-weight: 600; text-decoration: underline;">
+                        แก้ข้อมูลการรับของ (กรณีเคยลงทะเบียนแล้ว)
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- END STEP 0 -->
+
+        <!-- Poster Modal (Lightbox) -->
+        <div id="poster-modal" class="modal"
+            style="display:none; background: rgba(0,0,0,0.9); z-index: 20000; padding: 20px; box-sizing: border-box;"
+            onclick="closePosterModal()">
+            <span
+                style="position: absolute; top: 20px; right: 20px; color: white; font-size: 40px; font-weight: bold; cursor: pointer;">&times;</span>
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <img src="images/donate_workshop.jpg"
+                    style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px;">
+            </div>
+        </div>
+
+        <!-- ===== STEP 1: ระบุตัวตน ===== -->
+        <div class="donate-step" id="step-1" style="display: none;">
+
+            <div class="form-section-card" id="social-section-wrapper">
+                <p class="form-section-title" id="social-login-label">บัญชีโซเชียลของคุณ</p>
+
+                <div id="social-input-form">
+                    <div class="social-tab-group" id="social-tab-group">
+                        <button class="social-tab active" data-social="x">X</button>
+                        <button class="social-tab" data-social="tiktok">TikTok</button>
+                        <button class="social-tab" data-social="ig">IG</button>
+                        <button class="social-tab" data-social="line">Line</button>
+                    </div>
+                    <input type="text" class="form-input" id="social-username" placeholder="Username"
+                        autocomplete="off">
+                    <p id="social-login-note"
+                        style="color: #E53E3E; font-size: 0.82rem; font-weight: 600; margin-top: 12px; text-align: center; margin-bottom: 0;">
+                        *ใช้บัญชีเดิมที่เคยแจ้งโดเนท หรือ Workshop ไว้ เพื่อตรวจสอบสิทธิ์ของคุณ
+                    </p>
+                </div>
+            </div>
+
+            <div class="api-loading-wrapper" id="api-loading-social"
+                style="display:none; margin-top:20px; text-align:center;">
+                <div class="ai-loading-spinner"></div>
+                <p class="ai-loading-text">กำลังโหลดข้อมูล...</p>
+            </div>
+
+            <button class="btn-confirm gradient-btn-3" id="btn-next-step1" style="margin-top: 20px;">
+                ถัดไป
+            </button>
+        </div>
+        <!-- END STEP 1 -->
+
+
+        <!-- ===== STEP 2: เลือกสิทธิ์และวิธีรับ ===== -->
+        <div class="donate-step" id="step-2" style="display:none">
+
+            <!-- Current Rights -->
+            <div id="current-rights-box"
+                style="background: linear-gradient(135deg, #286ACD 0%, #A3E4DB 50%, #FED1E1 100%); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 25px; border: none; box-shadow: 0 4px 15px rgba(40, 106, 205, 0.15);">
+                <p style="color: #1A202C; font-weight: 800; font-size: 0.95rem; margin-bottom: 5px;">
+                    จำนวนสิทธิ์ปัจจุบันของคุณ</p>
+                <h2 style="font-size: 3.5rem; color: #1A202C; margin: 0; font-weight: 900; letter-spacing: -1.5px;">
+                    <span id="display-current-rights">0</span>
+                </h2>
+                <p style="color: #2D3748; font-size: 0.9rem; font-weight: 700; margin-top: 5px; letter-spacing: 0.2px;"
+                    id="current-rights-detail">
+                    สิทธิในการทำ WORKSHOP
+                </p>
+            </div>
+
+            <div
+                style="background: #FFFFFF; border-radius: 24px; padding: 25px 20px; border: 1px solid #E2E8F0; margin-bottom: 25px;">
+                <!-- Selection Section -->
+                <div id="item-selector-wrapper">
+                    <p style="font-size: 0.95rem; font-weight: 800; color: #2D3748; margin-bottom: 20px;">
+                        จำนวนที่ต้องการ</p>
+                    <div class="qty-selector"
+                        style="display:flex; align-items:center; justify-content:center; gap:25px; margin-bottom:30px; position:relative;">
+                        <button class="qty-btn" id="btn-qty-minus" style="font-size:1.5rem;">-</button>
+                        <span id="display-qty"
+                            style="font-size:1.8rem; font-weight:900; color:#2D3748; min-width:80px; text-align:center;">1
+                            สิทธิ์</span>
+                        <button class="qty-btn" id="btn-qty-plus" style="font-size:1.5rem;">+</button>
+                    </div>
+                </div>
+
+                <div id="location-section-wrapper">
+                    <hr id="location-divider" style="border: none; border-top: 1px dashed #E2E8F0; margin: 25px 0;">
+
+                    <!-- Delivery Method -->
+                    <h3 style="font-size: 1.05rem; font-weight: 800; color: #2D3748; margin-bottom: 5px;">สถานที่
+                        Workshop</h3>
+                    <p style="font-size:0.85rem; color:#A0AEC0; margin-top:-2px; margin-bottom:20px; font-weight:600;">
+                        (ตัวเลือกนี้จะถูกปรับใช้กับการส่ง Giveaway จากยอดโดเนทด้วยเช่นกัน)</p>
+
+                    <div id="past-reception-box"
+                        style="display:none; background: #FFF; border-radius: 20px; padding: 15px; border: 1.5px solid #286ACD; margin-bottom: 15px; position: relative;">
+                        <div style="display:flex; align-items:center; gap:12px;">
+                            <div
+                                style="width:40px; height:40px; background:#E0F2FE; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#286ACD"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <p style="margin:0; font-size:0.9rem; color:#4A5568; font-weight:700;">
+                                    ครั้งที่แล้วคุณเลือก <br><span id="past-type-text"
+                                        style="color:#286ACD; font-size:1rem;">จัดส่งตามที่อยู่</span>
+                                </p>
+
+                            </div>
+                            <button id="btn-edit-reception"
+                                style="background:none; border:none; padding:8px; cursor:pointer;" aria-label="Edit">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#A0AEC0"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <!-- Past Delivery details -->
+                        <div id="past-details" style="display:none; margin-top:12px; font-size:0.85rem; color:#4A5568;">
+                            <div style="font-size:0.9rem; color:#4A5568; line-height:1.6;">
+                                <p style="margin:0 0 4px; font-weight:700;">ชื่อผู้รับ : <span id="past-name">-</span>
+                                </p>
+                                <p style="margin:0 0 4px; font-weight:700;">ที่อยู่ : <span id="past-address">-</span>
+                                    <span id="past-postal">-</span>
+                                </p>
+                                <p style="margin:0; font-weight:700;">เบอร์โทรศัพท์ : <span id="past-phone">-</span></p>
+                            </div>
+                            <p id="past-fee-note"
+                                style="margin:12px 0 0; color:#38A169; font-size:0.85rem; font-weight:700; display:none;">
+                                หมายเหตุ : ค่าจัดส่งเหมาจ่าย 50 บาท ได้รวมอยู่ในกิจกรรมโดเนทและ Workshop เรียบร้อยแล้ว
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div id="reception-selector" style="display:flex; gap:15px; margin-bottom:15px;">
+                        <!-- Onsite -->
+                        <div class="delivery-method-card active" data-method="onsite"
+                            style="flex:1; background:white; border-radius:20px; padding:20px 10px; text-align:center; border:2px solid #286ACD; cursor:pointer; display:flex; flex-direction:column; align-items:center;">
+                            <div
+                                style="width:48px; height:48px; background:#F7FAFC; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#718096"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="method-icon-bg">
+                                    <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"></path>
+                                    <path d="m3 9 2.45-4.91A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.79 1.09L21 9"></path>
+                                </svg>
+                            </div>
+                            <p style="margin:0; font-weight:700; color:#4A5568; font-size:0.9rem;">ทำที่งาน<br><span
+                                    style="font-size:0.75rem; color:#A0AEC0;">25 - 26 เม.ย. 67</span></p>
+                        </div>
+                        <!-- Delivery -->
+                        <div class="delivery-method-card" data-method="delivery"
+                            style="flex:1; background:white; border-radius:20px; padding:20px 10px; text-align:center; border:1px solid #E2E8F0; cursor:pointer; display:flex; flex-direction:column; align-items:center;">
+                            <div
+                                style="width:48px; height:48px; background:#F7FAFC; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:12px;">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#718096"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="method-icon-bg">
+                                    <rect x="1" y="3" width="15" height="13"></rect>
+                                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                                </svg>
+                            </div>
+                            <p style="margin:0; font-weight:700; color:#4A5568; font-size:0.9rem;">
+                                จัดส่ง<br><span id="shipping-fee-text"
+                                    style="font-size:0.75rem; color:#F871B4;">ชำระเพิ่ม 50 บาท</span></p>
+                        </div>
+                    </div>
+
+                    <div id="delivery-details-form"
+                        style="display:none; transition: all 0.3s; background: #F8FAFC; padding: 15px; border-radius: 12px;">
+                        <p style="font-weight:700; color:#718096; font-size:0.8rem; margin-bottom:5px;">ชื่อผู้รับ</p>
+                        <input type="text" id="ship-name" class="form-input" placeholder="ชื่อ นามสกุล"
+                            style="margin-bottom:10px; font-size: 0.95rem; padding: 10px 15px;">
+
+                        <p style="font-weight:700; color:#718096; font-size:0.8rem; margin-bottom:5px;">เบอร์โทรศัพท์
+                        </p>
+                        <input type="tel" id="ship-phone" class="form-input" placeholder="เบอร์โทรศัพท์" maxlength="10"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                            style="margin-bottom:10px; font-size: 0.95rem; padding: 10px 15px;">
+
+                        <p style="font-weight:700; color:#718096; font-size:0.8rem; margin-bottom:5px;">ที่อยู่</p>
+                        <textarea id="ship-address" class="form-input"
+                            placeholder="บ้านเลขที่, ถนน, ซอย, อำเภอ, จังหวัด, ตำบล" rows="3"
+                            style="margin-bottom:10px; font-size: 0.95rem; padding: 10px 15px;"></textarea>
+
+                        <p style="font-weight:700; color:#718096; font-size:0.8rem; margin-bottom:5px;">รหัสไปรษณีย์</p>
+                        <input type="text" id="ship-postal" class="form-input" placeholder="รหัสไปรษณีย์" maxlength="5"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 5)"
+                            style="margin-bottom:5px; font-size: 0.95rem; padding: 10px 15px;">
+                    </div>
+                    <div id="onsite-notice-box"
+                        style="display:none; background: #E6FFFA; border: 1.5px solid #38B2AC; border-radius: 20px; padding: 25px 20px; text-align: center; margin-top: 20px;">
+                        <p style="margin: 0; font-size: 1rem; color: #2D3748; line-height: 1.5; font-weight: 500;">
+                            ค่าส่ง 50 บาท ที่คุณเคยชำระมาแล้ว<br>จะถูกนำไปเป็นยอดโดเนทของคุณแทน
+                        </p>
+                    </div>
+                </div> <!-- END location-section-wrapper -->
+            </div>
+
+        </div>
+        <!-- END STEP 2 -->
+
+        <!-- Price Summary Box (Sticky) -->
+        <div class="sticky-summary-box"
+            style="position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #E2E8F0; padding: 15px 20px; display:flex; justify-content:space-between; align-items:center; z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.08); box-sizing: border-box; display: none;">
+            <div
+                style="font-size: 0.85rem; color: #1A202C; font-weight: 800; display: flex; flex-direction: column; gap: 4px; min-width: 150px;">
+                <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px;">
+                    <span>WORKSHOP X <span id="summary-qty-inline">1</span></span>
+                    <span id="summary-price-inline" style="text-align: right;">0 บาท</span>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr auto; gap: 15px;">
+                    <span style="color: #A0AEC0;">ค่าจัดส่ง</span>
+                    <span id="summary-shipping-inline" style="text-align: right; color: #A0AEC0;">0 บาท</span>
+                </div>
+            </div>
+            <button class="btn-confirm" id="btn-next-step2"
+                style="width: auto; min-width: 130px; padding: 14px 20px; margin:0; border-radius: 12px; font-weight: 800; font-size: 1.1rem; background: #FF6666; color: white; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(255, 102, 102, 0.3);">
+                ยอดชำระ <span id="btn-total-price">100</span> บาท
+            </button>
+        </div>
+
+        <!-- ===== STEP 3: ชำระเงินและแนบหลักฐานการชำระ===== -->
+        <div class="donate-step" id="step-3" style="display:none">
+
+            <!-- Summary Box -->
+            <div
+                style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:20px; padding:20px; margin-bottom:20px; box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:20px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#38A169" stroke="none">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" fill="none">
+                        </path>
+                    </svg>
+                    <p style="font-weight:800;font-size:1.1rem;color:#2D3748;margin:0;">ทำการสั่งซื้อ</p>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                    <span style="color:#718096; font-size:0.95rem;">จำนวนสิทธิ์</span>
+                    <span style="font-weight:700; color:#2D3748;">x<span id="final-qty">1</span></span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+                    <span style="color:#718096; font-size:0.95rem;">รวมยอดการสั่งซื้อ workshop</span>
+                    <span style="font-weight:700; color:#2D3748;">฿ <span id="final-base-price">100</span></span>
+                </div>
+                <div
+                    style="display:flex; justify-content:space-between; margin-bottom:15px; padding-bottom:15px; border-bottom:1px dashed #E2E8F0;">
+                    <span style="color:#718096; font-size:0.95rem;">ค่าส่ง</span>
+                    <span style="font-weight:700; color:#2D3748;">฿ <span id="final-shipping">0</span></span>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span style="color:#4A5568; font-size:1rem; font-weight:800;">ยอดชำระเงินทั้งหมด</span>
+                    <span style="font-weight:900; color:#2D3748; font-size: 1.5rem;">฿ <span
+                            id="final-total">100</span></span>
+                </div>
+            </div>
+
+            <!-- Bank Info -->
+            <div class="account-info-box" style="margin-bottom: 25px;">
+
+                <div class="qr-container-new">
+                    <img src="images/qrcode_promptpay.png" alt="QR PromptPay" class="qr-image-large">
+                </div>
+
+                <div class="bank-header">
+                    <div class="bank-icon-k">
+                        <img src="images/logo-kbank.png" alt="KBank Logo">
+                    </div>
+                    <div class="bank-text">
+                        <p class="bank-name">ธนาคารกสิกรไทย</p>
+                        <p class="account-name">น.ส.ธัญดา โชติอนนต์</p>
+                    </div>
+                </div>
+                <div class="account-number-wrapper">
+                    <span class="account-number" id="account-number">212-8-94502-7</span>
+                    <button class="btn-copy" onclick="copyAccountNumber()">
+                        <span class="copy-icon"></span> คัดลอก
+                    </button>
+                </div>
+            </div>
+
+            <p style="font-weight:800; color:#2D3748; font-size:1rem; margin-bottom:10px;">กรุณาอัปโหลดหลักฐานการโอนเงิน
+            </p>
+
+            <!-- Upload Drop Zone -->
+            <div class="upload-zone" id="upload-zone" onclick="triggerFileInput()">
+                <input type="file" id="slip-file-input" accept=".jpg,.jpeg,.png,.heic,.heif" style="display:none"
+                    onchange="handleFileSelected(this)">
+                <div class="upload-zone-content" id="upload-zone-content">
+                    <div class="upload-icon-wrapper" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#286ACD" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 16 12 12 8 16"></polyline>
+                            <line x1="12" y1="12" x2="12" y2="21"></line>
+                            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                        </svg>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center;">
+                        <p class="upload-cta" style="margin-bottom:4px;">เลือกรูปภาพสลิป</p>
+                        <p class="upload-hint" style="font-weight:500;">รองรับ JPG, PNG หรือ HEIC</p>
+                    </div>
+                </div>
+                <!-- Preview state (hidden by default) -->
+                <div class="upload-preview-wrapper" id="upload-preview-wrapper" style="display:none">
+                    <img id="slip-preview-img" src="" alt="Slip Preview" class="slip-preview-img">
+                    <div class="preview-overlay">
+                        <p class="preview-change-text">กดเพื่อเปลี่ยนรูป</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verification Loader/Result -->
+            <div class="ai-loading-wrapper" id="api-loading" style="display:none; margin-top: 15px;">
+                <div class="ai-loading-spinner" style="margin:0 auto;"></div>
+                <p class="ai-loading-text" style="text-align: center; margin-top: 8px;">กำลังวิเคราะห์สลิป...</p>
+            </div>
+
+            <!-- Result Box -->
+            <div id="verification-result-box" style="display:none; margin-top:15px;">
+                <div id="verify-success"
+                    style="border: 1.5px solid #38A169; background: #F0FFF4; padding: 15px; border-radius: 15px; margin-bottom: 20px;">
+                    <p
+                        style="color: #38A169; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" style="margin-right: 8px;">
+                            <path d="M20 6L9 17l-5-5"></path>
+                        </svg>
+                        ตรวจสอบข้อมูลอัตโนมัติ
+                    </p>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px;">
+                        <span style="color: #718096;">ผู้โอน</span>
+                        <span id="verify-sender-name" style="font-weight: 700; color: #2D3748;">-</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px;">
+                        <span style="color: #718096;">จำนวนเงิน</span>
+                        <span id="verify-amount" style="font-weight: 700; color: #2D3748;">-</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                        <span style="color: #718096;">วัน/เวลา</span>
+                        <span id="verify-date" style="font-weight: 700; color: #2D3748;">-</span>
+                    </div>
+                </div>
+
+                <div id="verify-error" style="display: none; text-align: center; margin-bottom: 15px;">
+                    <p id="verify-error-msg"
+                        style="color: #E53E3E; font-weight: 700; margin-bottom: 5px; font-size: 0.95rem;">
+                        ยอดโอนเงินไม่ถูกต้อง</p>
+                    <p style="font-size:0.85rem; color:#718096;">กรุณาตรวจสอบสลิปอีกครั้ง หรือ <a
+                            href="https://x.com/NT1_Project_TH" target="_blank"
+                            style="color: #286ACD; text-decoration: underline;">ติดต่อเรา</a></p>
+                </div>
+            </div>
+
+            <!-- Submit Loader -->
+            <div class="api-loading-wrapper" id="submit-loading" style="display:none;text-align:center;margin:20px 0;">
+                <div class="ai-loading-spinner"></div>
+                <p class="ai-loading-text">กำลังบันทึกข้อมูล...</p>
+            </div>
+
+            <!-- Final Confirm Step 3 -->
+            <button class="btn-confirm gradient-btn-3" id="btn-submit-final" style="margin-top: 10px; display: none;">
+                ยืนยันข้อมูลการชำระเงิน
+            </button>
+        </div>
+        <!-- END STEP 3 -->
+
+
+        <!-- ===== SUCCESS SCREEN ===== -->
+        <div class="donate-step" id="step-success"
+            style="display:none; text-align: center; padding: 60px 15px 40px; min-height: 100vh; overflow-y: auto; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; z-index: 100;">
+
+            <div id="workshop-share-capture-root"
+                style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 420px;">
+
+            <!-- Logo Circle -->
+            <div
+                style="width: 100px; height: 100px; margin: 0 auto 10px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4); overflow: hidden;">
+                <img src="images/logo-project.png" alt="NexT1DE" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+
+            <!-- Header Text -->
+            <div style="margin-bottom: 25px; color: white;">
+                <h1 class="success-project-title">NextT1DE 1st Tide Party</h1>
+                <h2
+                    style="font-weight: 800; font-size: 1.25rem; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                    ขอบคุณที่เป็นส่วนหนึ่ง</h2>
+                <p
+                    style="font-weight: 700; font-size: 1.05rem; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                    ของโปรเจคครบรอบ 1 ปี NexT1DE</p>
+                <p style="font-size: 0.85rem; font-weight: 800; opacity: 0.9; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                    #NexT1DE1stTideParty #NexT1DEProjectTH #NexT1DE </p>
+            </div>
+            <div id="workshop-success-pill-card"
+                style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 0; width: 100%; max-width: 380px; margin: 0 auto 30px; box-sizing: border-box;">
+
+                <div
+                    style="flex-shrink: 0; align-self: center; background: #FF7B9C; color: #ffffff; padding: 10px 26px; border-radius: 999px; font-weight: 800; font-size: 0.85rem; line-height: 1.35; text-align: center; box-shadow: 0 4px 12px rgba(255, 123, 156, 0.4); box-sizing: border-box; position: relative; z-index: 10; margin-bottom: -22px;">
+                    สิทธิ์ในการทำ WORKSHOP ของคุณ
+                </div>
+
+                <div
+                    style="flex-shrink: 0; width: 100%; box-sizing: border-box; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 32px; padding: 35px 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+
+
+                    <div
+                        style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 25px;">
+                        <span id="success-total-rights"
+                            style="font-size: 4.8rem; color: #1A202C; font-weight: 900; line-height: 1; letter-spacing: -3px;">1</span>
+                        <span style="font-size: 2.2rem; color: #1A202C; font-weight: 900;">สิทธิ์</span>
+                    </div>
+
+                    <p style="font-size: 0.9rem; color: #4A5568; font-weight: 800; margin-bottom: 10;">
+                        ลงทะเบียนสำเร็จ!</br> หวังว่าเนกไทด์ที่ทำด้วยมือตัวเองครั้งนี้ </br>จะเป็นความทรงจำดีๆ ของทุกคน</p>
+
+
+                </div>
+            </div>
+            <p style="font-size: 0.9rem; color: #ffffff; font-weight: 800; margin-bottom: 0;">by NexT1DE Project
+                Thailand</p>
+
+            </div>
+            <!-- /workshop-share-capture-root -->
+
+            <!-- Actions -->
+            <div id="workshop-success-actions" style="display: flex; gap: 8px; justify-content: center; width: 100%; max-width: 380px; margin: 20px auto 0; align-items: stretch;">
+                <button id="btn-back-home"
+                    style="flex: 1; padding: 16px; border-radius: 18px; border: none; background: linear-gradient(135deg, #286ACD 0%, #A3E4DB 100%); color: white; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 20px rgba(40, 106, 205, 0.4); white-space: nowrap;">
+                    หน้าหลัก
+                </button>
+                <div style="display: flex; gap: 8px; flex: 2;">
+                    <button id="btn-share"
+                        style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px; border-radius: 18px; border: 1.5px solid #E2E8F0; background: white; color: #2D3748; font-weight: 800; font-size: 1rem; cursor: pointer;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D3748" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                            <polyline points="16 6 12 2 8 6"></polyline>
+                            <line x1="12" y1="2" x2="12" y2="15"></line>
+                        </svg>
+                        แชร์รูป
+                    </button>
+                    <button id="btn-share-url"
+                        style="width: 54px; display: flex; align-items: center; justify-content: center; border-radius: 18px; border: 1.5px solid #E2E8F0; background: white; cursor: pointer; flex-shrink: 0; padding: 0;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2D3748" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- END SUCCESS SCREEN -->
+
+    </main>
+
+    <!-- Edit Mode - No Account Modal -->
+    <div id="edit-error-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; backdrop-filter:blur(5px); justify-content:center; align-items:center;">
+        <div
+            style="background:white; width:90%; max-width:380px; padding:35px 25px; border-radius:28px; text-align:center; box-shadow:0 15px 40px rgba(0,0,0,0.2); animation: modalIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);">
+            <div
+                style="width:64px; height:64px; background:#FED7D7; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E53E3E" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+            </div>
+            <h3 style="font-size:1.2rem; color:#2D3748; font-weight:800; margin-bottom:10px;">ไม่พบข้อมูลการลงทะเบียน
+            </h3>
+            <p style="font-size:0.95rem; color:#718096; font-weight:500; margin-bottom:25px; line-height:1.5;">
+                คุณยังไม่เคยลงทะเบียนทำ workshop<br>กรุณาลงทะเบียนก่อนดำเนินการต่อ</p>
+            <button id="btn-go-register"
+                style="width:100%; background:linear-gradient(135deg, #2D69CD 0%, #30A195 100%); color:white; border:none; padding:15px; border-radius:15px; font-weight:700; font-size:1.05rem; cursor:pointer;">สนใจร่วม
+                Workshop</button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        function openPosterModal() {
+            document.getElementById('poster-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+        function closePosterModal() {
+            document.getElementById('poster-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+    <script src="workshop.js"></script>
+</body>
+
+</html>

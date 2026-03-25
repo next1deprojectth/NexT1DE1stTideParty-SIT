@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตรวจสอบข้อมูลผู้บริจาค - NexT1DE1stTideParty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo-project.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="donate.css">
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body class="donate-page-body">
+    <!-- Background Image -->
+    <div class="page-background donate-hide"></div>
+
+    <!-- Unified Navbar -->
+    <nav class="unified-nav">
+        <a href="dashboard.html" class="nav-back-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </a>
+        <div class="nav-title">ค้นหาข้อมูลจากโซเชียล</div>
+        <div class="nav-right-slot">
+            <button id="nav-search-btn"
+                style="display:none; background:transparent; border:none; cursor:pointer; color:#1A365D; padding:5px 8px;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="donate-main" style="padding-top: 100px;">
+
+        <!-- Search Section -->
+        <div class="form-section-card" id="search-section" style="margin-bottom: 25px;">
+            <p class="form-section-title">กรอกบัญชีโซเชียลเพื่อค้นหา</p>
+
+            <div class="social-tab-group" id="social-tab-group">
+                <button class="social-tab active" data-social="x" id="tab-twitter">X</button>
+                <button class="social-tab" data-social="tiktok" id="tab-tiktok">TikTok</button>
+                <button class="social-tab" data-social="IG" id="tab-ig">IG</button>
+                <button class="social-tab" data-social="line" id="tab-line">Line</button>
+            </div>
+            <input type="text" class="form-input" id="search-username" placeholder="Username" autocomplete="off">
+
+            <button class="gradient-btn-3" id="btn-search"
+                style="width: 100%; padding: 14px; border-radius: 15px; font-weight: 700; font-size: 1.1rem; color: white; border: none; margin-top: 15px; cursor: pointer;">
+                ค้นหาข้อมูล
+            </button>
+        </div>
+
+        <!-- Loading State -->
+        <div class="api-loading-wrapper" id="api-loading" style="display:none; text-align:center; margin: 30px 0;">
+            <div class="ai-loading-spinner"></div>
+            <p class="ai-loading-text">กำลังค้นหาข้อมูล...</p>
+        </div>
+
+        <!-- Error / Not found -->
+        <div id="error-message"
+            style="display:none; text-align:center; padding: 30px; background: #FFF5F5; border-radius: 20px; border: 1px solid #FEB2B2; margin-bottom: 25px;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E53E3E" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <p style="color: #E53E3E; font-weight: 700; font-size: 1.1rem; margin: 0;">ไม่พบข้อมูลผู้บริจาค</p>
+            <p style="color: #FC8181; font-size: 0.9rem; margin-top: 5px;">โปรดตรวจสอบ Username
+                หรือช่องทางโซเชียลอีกครั้ง</p>
+        </div>
+
+        <!-- Share URL Box -->
+        <div id="share-url-box"
+            style="display:none; margin-bottom: 20px; background: rgba(255,255,255,0.7); border-radius: 15px; padding: 15px; border: 1px dashed #A0AEC0; text-align: center;">
+            <p style="margin: 0 0 10px; font-size: 0.85rem; color: #718096; font-weight: 600;">
+                ลิงก์สำหรับดูข้อมูลหน้านี้</p>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="share-url-input" readonly class="form-input"
+                    style="font-size: 0.8rem; padding: 8px 12px; margin: 0; background: #F7FAFC; color: #4A5568;">
+                <button id="btn-copy-url"
+                    style="background: #286ACD; color: white; border: none; border-radius: 10px; padding: 0 15px; font-weight: 600; font-size: 0.9rem; cursor: pointer; white-space: nowrap;">คัดลอก</button>
+            </div>
+        </div>
+
+        <!-- Result Container -->
+        <div id="result-container" style="display:none;">
+
+            <!-- User Info Card -->
+            <div class="profile-card" style="padding:40px 30px; text-align:center;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:15px;">
+                    <div class="profile-avatar" id="profile-avatar" style="width:90px; height:90px; font-size:2.5rem;">U
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profile-name" style="font-size:1.8rem;">Username</h2>
+                        <p id="profile-social-type" style="padding:6px 20px; font-size:1rem; border-radius:30px;">
+                            ช่องทาง: -</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Card -->
+            <div class="profile-card"
+                style="background: linear-gradient(135deg, #2B6CB0 0%, #4299E1 100%); border:none; box-shadow:0 15px 35px rgba(66, 153, 225, 0.3);">
+                <p class="section-title"
+                    style="color: rgba(255,255,255,0.9); text-align: center; margin-bottom: 10px; justify-content:center;">
+                    ยอดโดเนทรวมทั้งหมด</p>
+                <p id="profile-total-amount"
+                    style="font-size: 3.5rem; letter-spacing:-1px; font-weight: 800; color: white; text-align: center; margin: 0; line-height: 1;">
+                    ฿0</p>
+
+                <div
+                    style="margin-top: 35px; background: rgba(255,255,255,0.95); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <p style="font-size: 1rem; font-weight: 800; color: #2D3748; margin: 0 0 15px; text-align: center;">
+                        Giveaway ที่ได้รับ</p>
+                    <div id="profile-gifts-container"></div>
+                </div>
+            </div>
+
+            <!-- Reception Card -->
+            <div class="profile-card" id="reception-card" style="display:none;">
+                <div class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                        </path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    วิธีรับ Giveaway
+                </div>
+
+                <div id="reception-details"
+                    style="background: rgba(235, 244, 255, 0.5); padding: 20px; border-radius: 20px; border: 1px dashed rgba(66, 153, 225, 0.4);">
+                    <p style="font-weight: 800; color: #3182CE; font-size: 1.1rem; margin: 0 0 12px; display:flex; align-items:center; gap:8px;"
+                        id="reception-type-label">จัดส่งตามที่อยู่</p>
+                    <div id="reception-address-box"
+                        style="display:none; font-size: 0.95rem; color: #4A5568; line-height: 1.7;">
+                        <p style="margin: 0 0 6px;"><strong>ผู้รับ:</strong> <span id="rec-name"></span></p>
+                        <p style="margin: 0 0 6px;"><strong>ที่อยู่:</strong> <span id="rec-address"></span> <span
+                                id="rec-postal"></span></p>
+                        <p style="margin: 0;"><strong>เบอร์โทร:</strong> <span id="rec-phone"></span></p>
+                    </div>
+                    <p id="reception-onsite-box"
+                        style="display:none; font-size: 0.95rem; color: #4A5568; margin:0; font-weight:500;">
+                        คุณเลือกรับ Giveaway ที่หน้างาน (จามจุรีสแควร์ชั้น G)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Donations History -->
+            <div class="profile-card">
+                <p class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    ประวัติการโอนเงิน
+                </p>
+                <div class="history-list" id="profile-history-list" style="margin-top: 25px;">
+                    <!-- Data injected here -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="config.js"></script>
+    <script src="profile.js"></script>
+
+</body>
+
+</html>

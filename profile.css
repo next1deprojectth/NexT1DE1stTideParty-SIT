@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap');
+
+/* profile.css */
+* { font-family: 'Noto Sans Thai', sans-serif; }
+
+/* Unified Navbar */
+.unified-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 70px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1000;
+    border-bottom: 1.5px solid #F1F5F9;
+}
+
+.nav-back-btn {
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    background: #F8FAFC; border-radius: 12px;
+    color: #475569; text-decoration: none;
+    transition: 0.2s;
+}
+
+.nav-back-btn:hover { background: #F1F5F9; transform: translateX(-3px); }
+
+.nav-title {
+    font-size: 1.1rem; font-weight: 800;
+    color: #0F172A; position: absolute; left: 50%;
+    transform: translateX(-50%); white-space: nowrap;
+}
+
+.nav-right-slot { width: 42px; display: flex; justify-content: flex-end; }
+
+/* Content Cards */
+.profile-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    border: 1px solid rgba(255,255,255,0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+}
+
+.profile-avatar {
+    width: 75px;
+    height: 75px;
+    background: linear-gradient(135deg, #7F9CFF 0%, #4299E1 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+    box-shadow: 0 6px 15px rgba(66, 153, 225, 0.4);
+}
+
+.profile-info h2 {
+    margin: 0 0 6px;
+    font-size: 1.5rem;
+    color: #1A365D;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.profile-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #2B6CB0;
+    background: rgba(235, 244, 255, 0.8);
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: 700;
+    border: 1px solid rgba(190, 227, 248, 0.8);
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #2D3748;
+    margin-bottom: 20px;
+    letter-spacing: -0.3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title svg {
+    color: #4299E1;
+}

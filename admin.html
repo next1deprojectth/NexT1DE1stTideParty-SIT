@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - NexT1DE</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo-project.png">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- Loader Modal -->
+    <div id="loader-modal" class="loader-modal">
+        <div class="small-spinner"></div>
+        <p style="font-weight: 800; font-size: 0.85rem; color: var(--text-muted);">กำลังโหลดข้อมูล...</p>
+    </div>
+
+    <div class="admin-container">
+
+        <!-- Unified Navbar -->
+        <nav class="unified-nav">
+            <a href="dashboard.html" class="nav-back-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </a>
+            <div class="nav-title">Giveaway และ Workshop</div>
+            <div class="nav-right-slot"></div>
+        </nav>
+
+        <!-- Sticky Container for Filters & Tabs -->
+        <div class="filter-row-sticky">
+            <div class="status-filters-modern">
+                <input type="text" id="search-input" class="search-input-modern" placeholder="ค้นหาชื่อ / UID...">
+                <select id="filter-shipping" class="filter-select-modern">
+                    <option value="all">วิธีรับทั้งหมด</option>
+                    <option value="delivery">เฉพาะจัดส่ง</option>
+                    <option value="onsite">รับหน้างาน</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div id="tab-info-bar" class="tab-info-bar">
+            พบรายชื่อทั้งหมด 0 คน
+        </div>
+
+        <!-- Scrollable Data Area -->
+        <main class="data-view-area">
+            <div class="table-wrapper">
+                <table id="admin-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">ผู้ใช้</th>
+                            <th style="width: 15%;">Giveaway ที่ได้รับ</th>
+                            <th style="width: 15%;">Workshop</th>
+                            <th style="width: 12%;">ยอด (สุทธิ)</th>
+                            <th style="width: 12%;">วิธีรับของ</th>
+                            <th>ที่อยู่ & ติดต่อ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-rows">
+                        <!-- Data injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="config.js"></script>
+    <script src="admin.js"></script>
+
+</body>
+
+</html>

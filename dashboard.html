@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - NexT1DE</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo-project.png">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header animate-fade-in">
+            <div class="header-titles">
+                <h2 class="serif-title">Admin Dashboard - NexT1DE 1st Tide Party</h2>
+                <div class="status-badge" id="last-updated">อัพเดทล่าสุด --:--:--</div>
+            </div>
+        </header>
+
+        <!-- 3 Highlight Navigation Buttons (Sticky & More Compact) -->
+        <div class="quick-nav-wrapper">
+            <nav class="quick-nav animate-fade-in">
+                <a href="verify.html" class="nav-btn purple-btn">
+                    <span>ตรวจสอบสลิป</span>
+                    <div class="go-circle">→</div>
+                </a>
+                <a href="admin.html" class="nav-btn green-btn">
+                    <span>Giveaway และ Workshop</span>
+                    <div class="go-circle">→</div>
+                </a>
+                <a href="profile.html" class="nav-btn blue-btn">
+                    <span>ค้นหาข้อมูลจากโซเชียล</span>
+                    <div class="go-circle">→</div>
+                </a>
+            </nav>
+        </div>
+
+        <div id="main-content" class="staggered-grid">
+
+            <!-- SECTION 0 — ยอดเงินรวมทั้งหมด -->
+            <section class="dashboard-section section-0">
+                <h2 class="section-title">สรุปยอดเงินรวมทั้งหมด</h2>
+                <div class="stat-card grand-total-card">
+                    <div class="grand-total-main">
+                        <span class="label">ยอดเงินรวมสุทธิ (Approved)</span>
+                        <div id="grand-total-amount" class="mega-val-premium">฿0</div>
+                    </div>
+                    <div class="grand-total-breakdown">
+                        <div class="bt-item">
+                            <span class="bt-label">ยอดโดเนท</span>
+                            <span id="breakdown-donate" class="bt-val">฿0</span>
+                        </div>
+                        <div class="bt-item">
+                            <span class="bt-label">ค่า Workshop</span>
+                            <span id="breakdown-workshop" class="bt-val">฿0</span>
+                        </div>
+                        <div class="bt-item">
+                            <span class="bt-label">ค่าจัดส่ง</span>
+                            <span id="breakdown-shipping" class="bt-val">฿0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 1 — ยอดเงินทั้งหมด -->
+            <section class="dashboard-section section-1">
+                <h2 class="section-title">1. ยอดเงิน (สุทธิ)</h2>
+                <div class="grid-2-cols">
+                    <div class="stat-card">
+                        <h3 class="card-header-title">ยอดเงินโดเนท</h3>
+                        <div class="money-stack">
+                            <div class="m-item"><span class="label">รอตรวจ</span> <span id="donate-net-pending"
+                                    class="val amber">฿0</span></div>
+                            <div class="m-item highlight-row"><span class="label">อนุมัติแล้ว</span> <span
+                                    id="donate-net-approved" class="val waterleaf">฿0</span></div>
+                            <div class="m-item"><span class="label">ไม่ผ่าน</span> <span id="donate-net-rejected"
+                                    class="val red">฿0</span></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="card-header-title">ยอดเงิน Workshop</h3>
+                        <div class="money-stack">
+                            <div class="m-item"><span class="label">รอตรวจ</span> <span id="workshop-net-pending"
+                                    class="val amber">฿0</span></div>
+                            <div class="m-item highlight-row"><span class="label">อนุมัติแล้ว</span> <span
+                                    id="workshop-net-approved" class="val waterleaf">฿0</span></div>
+                            <div class="m-item"><span class="label">ไม่ผ่าน</span> <span id="workshop-net-rejected"
+                                    class="val red">฿0</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2 — สิทธิ์ Workshop -->
+            <section class="dashboard-section section-2">
+                <h2 class="section-title">2. สิทธิ์ Workshop (เฉพาะอนุมัติแล้ว)</h2>
+                <div class="stat-card workshop-rights-row">
+                    <div class="w-source-item">
+                        <span class="w-label">จากโดเนท</span>
+                        <b id="workshop-rights-donate-approved" class="w-val waterleaf">0</b>
+                    </div>
+                    <div class="divider-v"></div>
+                    <div class="w-source-item">
+                        <span class="w-label">จากการซื้อเอง</span>
+                        <b id="workshop-rights-sell-approved" class="w-val blue-text">0</b>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3 — การจัดส่ง -->
+            <section class="dashboard-section section-3">
+                <h2 class="section-title">3. การจัดส่ง</h2>
+                <div class="grid-2-cols">
+                    <!-- 3.1 ค่าจัดส่ง -->
+                    <div class="stat-card highlight-shipping ship-main">
+                        <h3 class="card-header-title">3.1 ค่าจัดส่งที่ได้รับ (Approved)</h3>
+                        <div id="ship-approved-total" class="mega-val waterleaf">฿0</div>
+                        <p class="card-desc">ราคารวมค่าส่งจากรายการที่ผ่านการตรวจสอบแล้ว</p>
+                    </div>
+                    <!-- 3.2 ช่องทางการรับของ -->
+                    <div class="stat-card delivery-main">
+                        <h3 class="card-header-title">3.2 จำนวนที่จัดส่งและ Onsite</h3>
+                        <div class="delivery-split">
+                            <div class="d-item">
+                                <span class="d-label">🏪 รับหน้างาน</span>
+                                <b id="onsite-total" class="d-val">0</b>
+                            </div>
+                            <div class="d-item">
+                                <span class="d-label">📦 จัดส่งที่บ้าน</span>
+                                <b id="delivery-total" class="d-val">0</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4 — ปริมาณผู้เข้าร่วม -->
+            <section class="dashboard-section section-4">
+                <h2 class="section-title">4. ปริมาณผู้เข้าร่วมและรายการ (Approved)</h2>
+                <div class="grid-2-cols">
+                    <div class="stat-card users-card-modern">
+                        <h3 class="card-header-title">กิจกรรมโดเนท (Donation)</h3>
+                        <div class="user-split-stats">
+                            <div class="us-item">
+                                <span class="us-label">จำนวนคน (Unique Users)</span>
+                                <b id="donate-users-count" class="us-val">0</b>
+                            </div>
+                            <div class="us-divider"></div>
+                            <div class="us-item">
+                                <span class="us-label">จำนวนรายการ (Transactions)</span>
+                                <b id="donate-trans-count" class="us-val">0</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card users-card-modern">
+                        <h3 class="card-header-title">กิจกรรม Workshop</h3>
+                        <div class="user-split-stats">
+                            <div class="us-item">
+                                <span class="us-label">จำนวนคน (Unique Users)</span>
+                                <b id="workshop-users-count" class="us-val">0</b>
+                            </div>
+                            <div class="us-divider"></div>
+                            <div class="us-item">
+                                <span class="us-label">จำนวนรายการ (Transactions)</span>
+                                <b id="workshop-trans-count" class="us-val">0</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

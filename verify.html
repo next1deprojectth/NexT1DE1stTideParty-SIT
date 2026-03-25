@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Receipts - NexT1DE Admin</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo-project.png">
+    <link rel="stylesheet" href="verify.css">
+</head>
+
+<body>
+
+    <!-- Loader Modal (Smaller) -->
+    <div id="loader-modal" class="loader-modal">
+        <div class="small-spinner"></div>
+        <p style="font-weight: 800; font-size: 0.85rem; color: var(--text-muted);">กำลังดำเนินการ...</p>
+    </div>
+
+    <div class="verify-container">
+
+        <!-- Unified Navbar -->
+        <nav class="unified-nav">
+            <a href="dashboard.html" class="nav-back-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </a>
+            <div class="nav-title">ตรวจสอบสลิป</div>
+            <div class="nav-right-slot"></div>
+        </nav>
+
+        <div class="filter-row-sticky">
+            <div class="status-filters-modern">
+                <button class="filter-btn active" onclick="filterByStatus('all', this)">ทั้งหมด</button>
+                <button class="filter-btn" onclick="filterByStatus('pending', this)">รอตรวจ</button>
+                <button class="filter-btn" onclick="filterByStatus('approved', this)">ผ่าน</button>
+                <button class="filter-btn" onclick="filterByStatus('rejected', this)">ไม่ผ่าน</button>
+            </div>
+        </div>
+
+        <div class="tabs-control-sticky">
+            <button id="tab-donate" class="tab-btn active" onclick="switchTab('donate')">
+                <span class="tab-text">Giveaway</span>
+            </button>
+            <button id="tab-workshop" class="tab-btn" onclick="switchTab('workshop')">
+                <span class="tab-text">Workshop</span>
+            </button>
+        </div>
+
+        <div id="tab-info-bar" class="tab-info-bar">
+            พบรายการทั้งหมด 0 รายการ
+        </div>
+
+        <!-- Feed Content -->
+        <main id="feed-container" class="feed-grid">
+            <!-- Cards will be injected here -->
+        </main>
+
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>แก้ไขข้อมูล</h2>
+                <button onclick="closeModal()" class="btn-close">&times;</button>
+            </div>
+            <form id="edit-form" class="modal-body">
+                <input type="hidden" id="edit-order">
+                <input type="hidden" id="edit-type">
+
+                <div class="form-group">
+                    <label>ยอดโอน (Amount)</label>
+                    <input type="number" id="edit-amount" required>
+                </div>
+
+                <div class="form-group">
+                    <label>วันที่และเวลาโอน (YYYY/MM/DD HH:mm:ss)</label>
+                    <input type="text" id="edit-date" placeholder="2026/03/22 14:00:00">
+                </div>
+
+                <div class="form-group">
+                    <label>Transaction Ref</label>
+                    <input type="text" id="edit-ref">
+                </div>
+
+                <div id="workshop-fields" class="form-group" style="display: none;">
+                    <label>จำนวนไอเทม (Workshop Only)</label>
+                    <input type="number" id="edit-items">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" onclick="closeModal()" class="btn-modal-secondary">ยกเลิก</button>
+                    <button type="submit" class="btn-modal-primary">บันทึกการเปลี่ยนแปลง</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Remark Modal -->
+    <div id="remark-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>หมายเหตุ (Remark)</h2>
+                <button onclick="closeRemarkModal()" class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <textarea id="remark-input" rows="4" placeholder="ใส่หมายเหตุที่นี่..."></textarea>
+                <div class="modal-footer">
+                    <button type="button" onclick="closeRemarkModal()" class="btn-modal-secondary">ยกเลิก</button>
+                    <button type="button" onclick="saveRemark()" class="btn-modal-primary">บันทึกหมายเหตุ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="verify.js"></script>
+
+</body>
+
+</html>

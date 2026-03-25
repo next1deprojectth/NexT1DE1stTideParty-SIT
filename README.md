@@ -1,2 +1,1 @@
-# NexT1DE1stTideParty-SIT
-Test Sit Donate ครบรอบ 1 ปีของ NexT1DE 
+https://next1deprojectth.github.io/NexT1DE1stTideParty/
